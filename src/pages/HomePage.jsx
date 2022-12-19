@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Product from '../component/Product'
 // import data from '../data'
 
 function reducer(state, action) {
@@ -55,24 +56,20 @@ const HomePage = () => {
       <div className='products'>
 
         {
-        loading ? <>Loading...</> :
-        error ? <div>{error}</div>:
-        products.map((product) => (
-          <div className="product" key={product.slug}>
-            <Link to={`/product/${product.slug}`}>
-              <img src={product.image} alt={product.name} />
-            </Link>
-            <div className="product-info">
-              <Link to={`/product/${product.slug}`}>
-                <p>{product.name}</p>
-              </Link>
-              <p>
-                <strong>${product.price}</strong>
-              </p>
-              <button>Add to cart</button>
+          loading ? (<>Loading...</>
+          ) : error ? (<div>{error}</div>
+          ) : (
+            <div className='row'>
+              {
+                products.map((product) => (
+                  <div key={product.slug} className='col-sm-4 col-lg-3 mb-3'>
+                    <Product product={product} />
+                  </div>
+                ))
+              }
             </div>
-          </div>
-        ))}
+          )}
+
       </div>
     </>
   )
