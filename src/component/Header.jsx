@@ -10,7 +10,7 @@ const Header = () => {
                 </div>
             </header>
 
-            <main className='container-lg flex-fill'>
+            <main className='container-lg border border-danger flex-fill'>
                 <Outlet />
             </main>
 

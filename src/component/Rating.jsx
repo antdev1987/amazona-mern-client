@@ -4,10 +4,6 @@ const Rating = (props) => {
 
     const {rating, numReviews} = props
 
-
-    console.log(rating)
-
-
     return (
         <div className='text-warning'>
             <span>
