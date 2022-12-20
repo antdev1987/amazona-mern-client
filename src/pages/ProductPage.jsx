@@ -2,7 +2,10 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useReducer } from 'react'
 import { useParams } from 'react-router-dom'
+import MessageBox from '../component/MessageBox'
 import Rating from '../component/Rating'
+import Spinner from '../component/Spinner'
+import getError from '../utils/getError'
 
 const init = {
   loading: true,
@@ -36,7 +39,7 @@ const ProductPage = () => {
         const { data } = await axios(url)
         dispatch({ type: 'fetch success', payload: data })
       } catch (error) {
-        dispatch({ type: 'fetch failed', payload: error.message })
+        dispatch({ type: 'fetch failed', payload: getError(error) })
       }
     }
 
@@ -44,13 +47,11 @@ const ProductPage = () => {
 
   }, [slug])
 
-  console.log(product.inStock)
-
   return (
     loading ? (
-      <div>Loading...</div>
+      <Spinner />
     ) : error ? (
-      <div>{error}</div>
+      <MessageBox modo='error'>{error}</MessageBox>
     ) : (
 
       <div className='row  h-100'>
@@ -65,7 +66,7 @@ const ProductPage = () => {
               <Rating rating={product.rating} numReviews={product.numReviews} />
             </li>
             <li className='list-group-item'>
-            <span>Price: ${product.price}</span>
+              <span>Price: ${product.price}</span>
             </li>
             <li className="list-group-item">
               Descripton:

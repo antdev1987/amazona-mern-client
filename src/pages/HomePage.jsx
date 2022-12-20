@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Product from '../component/Product'
+import Spinner from '../component/Spinner'
+import getError from '../utils/getError'
+import MessageBox from '../component/MessageBox'
 // import data from '../data'
 
 function reducer(state, action) {
@@ -40,8 +43,7 @@ const HomePage = () => {
         dispatch({ type: 'fetch succes', payload: data })
         // setProducts(data)
       } catch (error) {
-        dispatch({ type: 'fetch fail', payload: error.message })
-        console.log(error)
+        dispatch({ type: 'fetch fail', payload: getError(error) })
       }
     }
 
@@ -56,8 +58,8 @@ const HomePage = () => {
       <div className='products'>
 
         {
-          loading ? (<>Loading...</>
-          ) : error ? (<div>{error}</div>
+          loading ? (<Spinner />
+          ) : error ? (<MessageBox>{error}</MessageBox>
           ) : (
             <div className='row'>
               {
