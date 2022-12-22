@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider, } from 'react-router-dom'
 import HomePage from './pages/HomePage.jsx'
 import Header from './component/Header.jsx'
 import ProductPage from './pages/ProductPage.jsx'
+import {StoreProvider} from './context/StoreProvider.jsx'
 
 
 const router = createBrowserRouter([
@@ -27,7 +28,9 @@ function App() {
 
 
   return (
-    <RouterProvider router={router} />
+    <StoreProvider>
+      <RouterProvider router={router} />
+    </StoreProvider>
   )
 }
 
