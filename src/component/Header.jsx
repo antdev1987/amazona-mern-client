@@ -20,7 +20,7 @@ const Header = () => {
               {
                 cart.cartItems.length > 0 && (
                   <span className="position-absolute  top-0 start-100  badge rounded-pill bg-danger">
-                    {cart.cartItems.length}+
+                    {cart.cartItems.reduce((a,b)=> a + b.quantity , 0 )}
                     <span className="visually-hidden">unread messages</span>
                   </span>
 

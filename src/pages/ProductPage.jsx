@@ -29,8 +29,8 @@ function reducer(state, action) {
 const ProductPage = () => {
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, init)
-  const {state, dispatch:cxtDispatch} = useStore()
-  const {cart} = state
+  const { state, dispatch: cxtDispatch } = useStore()
+  const { cart } = state
   const { slug } = useParams()
 
   useEffect(() => {
@@ -50,13 +50,21 @@ const ProductPage = () => {
 
   }, [slug])
 
-  const handleAddToCart =()=>{
+  const handleAddToCart = async () => {
 
-    const existingItem = cart.cartItems.find(item => item._id === product._id)
-  
-    let quantity = existingItem ? existingItem.quantity + 1 : 1
+    const existingItem = state.cart.cartItems.find((item) => item._id === product._id)
 
-    cxtDispatch({type:'add to cart', payload:{...product, quantity}})
+    const quantity = existingItem ? existingItem.quantity + 1 : 1
+    const url = `http://localhost:4000/api/products/${product._id}`
+
+    const { data } = await axios.get(url)
+
+    if(data.stock < quantity){
+      window.alert('product is out of stock')
+      return
+    }
+
+    cxtDispatch({ type: 'add to cart', payload: { ...product, quantity } })
   }
 
   return (

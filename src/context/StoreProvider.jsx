@@ -15,20 +15,14 @@ function reducer(state, action) {
         case 'add to cart':
             //add to cart
 
-            const newItem = action.payload;
+            const exist = state.cart.cartItems.find((x) => x._id === action.payload._id)
 
-            const existItem = state.cart.cartItems.find(
-                (item) => item._id === newItem._id
-            );
-
-            const cartItems = existItem
-                ? state.cart.cartItems.map((item) =>
-                    item._id === existItem._id ? newItem : item
-                )
-                : [...state.cart.cartItems, newItem];
-
+            const cartUpdated = exist ? state.cart.cartItems.map((item) => (
+                item._id === action.payload._id ? action.payload : item
+            )): [...state.cart.cartItems , action.payload]
+            
             return (
-                { ...state, cart: { ...state.cart, cartItems } }
+                { ...state, cart: { ...state.cart, cartItems:[...cartUpdated] } }
             )
         default: return state
     }
