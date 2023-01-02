@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage.jsx'
 import Header from './component/Header.jsx'
 import ProductPage from './pages/ProductPage.jsx'
 import {StoreProvider} from './context/StoreProvider.jsx'
+import CartPage from './pages/CartPage.jsx'
+import SignInPage from './pages/SignInPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       {
         path: 'product/:slug',
         element: <ProductPage />
+      },
+      {
+        path:'cart',
+        element:<CartPage />
+      },
+      {
+        path:'signin',
+        element:<SignInPage />
       }
     ]
   },

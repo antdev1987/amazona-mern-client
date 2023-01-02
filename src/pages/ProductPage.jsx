@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useReducer } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import MessageBox from '../component/MessageBox'
 import Rating from '../component/Rating'
 import Spinner from '../component/Spinner'
@@ -30,8 +30,8 @@ const ProductPage = () => {
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, init)
   const { state, dispatch: cxtDispatch } = useStore()
-  const { cart } = state
   const { slug } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
 
@@ -59,12 +59,13 @@ const ProductPage = () => {
 
     const { data } = await axios.get(url)
 
-    if(data.stock < quantity){
+    if (data.stock < quantity) {
       window.alert('product is out of stock')
       return
     }
 
     cxtDispatch({ type: 'add to cart', payload: { ...product, quantity } })
+    navigate('/cart')
   }
 
   return (

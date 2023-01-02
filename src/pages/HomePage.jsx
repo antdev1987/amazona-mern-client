@@ -25,8 +25,6 @@ function reducer(state, action) {
 
 const HomePage = () => {
 
-  // const [products, setProducts] = useState([])
-
   const [{ loading, products, error }, dispatch] = useReducer(reducer, {
     loading: false,
     products: [],
