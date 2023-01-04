@@ -7,19 +7,17 @@ import { useEffect } from 'react'
 const CartPage = () => {
 
   const { state, dispatch:cxtDispatch } = useStore()
-  const { cart: { cartItems } } = state
+  const { cart: { cartItems }, userInfo } = state
 
   const navigate = useNavigate()
 
+  // useEffect(()=>{
 
-  useEffect(()=>{
+  //   if(cartItems.length === 0){
 
-    if(cartItems.length === 0){
+  //   }
 
-    }
-
-  },[cartItems])
-
+  // },[cartItems])
 
   const updateCartHandle =async(item, quantity) =>{
 
@@ -27,7 +25,7 @@ const CartPage = () => {
 
     try {
       
-      const {data} = await axios(`${import.meta.env.VITE_API_BASE_URL}/${item._id}`)
+      const {data} = await axios(`${import.meta.env.VITE_API_BASE_URL}/products/${item._id}`)
 
       console.log(data)
       if(data.stock < quantity){
@@ -44,13 +42,12 @@ const CartPage = () => {
   }
 
   const deleteCartHandler = async(id)=>{
-
     cxtDispatch({type : 'remove item cart', payload: id})
-
   }
 
   const checkoutHandler = () => {
-    navigate('/signin?redirect=/shipping');
+
+    navigate(userInfo?.token ? '/shipping' : '/signin?redirect=/shipping');
   };
 
   return (

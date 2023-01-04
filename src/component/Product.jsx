@@ -13,7 +13,7 @@ const Product = ({ product }) => {
   const { state, dispatch: cxtDispatch } = useStore()
 
   const handleAddToCart = async () => {
-    
+
     const existingItem = state.cart.cartItems.find((item) => item._id === product._id)
 
     const quantity = existingItem ? existingItem.quantity + 1 : 1
@@ -44,7 +44,7 @@ const Product = ({ product }) => {
         <Card.Text>
           <strong>${product.price}</strong>
         </Card.Text>
-        <Button onClick={handleAddToCart} disabled={product.countInStock ===0} variant="warning">Add to cart</Button>
+        <Button onClick={handleAddToCart} disabled={product.countInStock === 0} variant="warning">Add to cart</Button>
       </Card.Body>
     </Card>
 

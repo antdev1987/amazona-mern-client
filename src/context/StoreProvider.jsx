@@ -2,17 +2,19 @@ import { useContext } from "react";
 import { createContext, useReducer } from "react";
 
 
-
-const StoreContext = createContext()
-
 const initialState = {
     cart: {
+        shippingAddress: localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : {},
         cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
-    }
+    },
+
+    userInfo:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+    
 }
 
 function reducer(state, action) {
     switch (action.type) {
+
         case 'add to cart': {
             //add to cart
 
@@ -40,17 +42,55 @@ function reducer(state, action) {
             )
         }
 
+        //user log in
+        case 'user signin':{
+            localStorage.setItem('userInfo', JSON.stringify(action.payload))
+            return (
+                {...state, userInfo:action.payload}
+            )
+        }
+
+        //user log out
+        case 'user signout':{
+            return{
+                ...state,
+                userInfo:null,
+                cart:{
+                    cartItems:[],
+                    shippingAddress:{}
+                }
+            
+            }
+        }
+
+        //shipping address
+        case 'save shipping address':{
+            localStorage.setItem('shippingAddress', JSON.stringify(action.payload))
+            return (
+                {
+                    ...state,
+                    cart:{
+                        ...state.cart,
+                        shippingAddress: action.payload
+                    }
+                }
+            )
+        }
+
 
         default: return state
     }
 
 }
 
+
+// el context
+
+const StoreContext = createContext()
+
 const StoreProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
-
-
     return (
         <StoreContext.Provider
             value={{ state, dispatch }}
@@ -64,5 +104,4 @@ const useStore = () => {
     return useContext(StoreContext)
 }
 export default useStore
-
 export { StoreProvider }

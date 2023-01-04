@@ -37,7 +37,7 @@ const HomePage = () => {
       dispatch({ type: 'fetch request' })
       try {
         const url = 'http://localhost:4000/api/products'
-        const { data } = await axios.get(url)
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/products`)
         dispatch({ type: 'fetch succes', payload: data })
         // setProducts(data)
       } catch (error) {
