@@ -2,8 +2,6 @@ import React from 'react'
 
 const CheckOutSteps = (props) => {
 
-    console.log(props)
-
   return (
     <div className='row mb-2'>
 

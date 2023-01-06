@@ -10,6 +10,9 @@ import SignInPage from './pages/SignInPage.jsx'
 import Unathorized from './component/Unathorized.jsx'
 import ShippingAddressPage from './pages/ShippingAddressPage.jsx'
 import PrivateRoutes from './component/PrivateRoutes.jsx'
+import SignupPage from './pages/SignupPage.jsx'
+import PaymentMethodPage from './pages/PaymentMethodPage.jsx'
+import PlacerOrderPage from './pages/PlacerOrderPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -36,12 +39,34 @@ const router = createBrowserRouter([
       },
 
       {
+        path:'signup',
+        element:<SignupPage />
+      },
+
+      {
         path: 'shipping',
         element:
           <PrivateRoutes>
             <ShippingAddressPage />
           </PrivateRoutes>
-      }
+      },
+
+      {
+        path: 'payment',
+        element:
+          <PrivateRoutes>
+            <PaymentMethodPage />
+          </PrivateRoutes>
+      },
+
+      {
+        path: 'placeorder',
+        element:
+          <PrivateRoutes>
+            <PlacerOrderPage />
+          </PrivateRoutes>
+      },
+
     ]
   },
 ])
