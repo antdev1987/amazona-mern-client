@@ -13,6 +13,8 @@ import PrivateRoutes from './component/PrivateRoutes.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import PaymentMethodPage from './pages/PaymentMethodPage.jsx'
 import PlacerOrderPage from './pages/PlacerOrderPage.jsx'
+import OrderPage from './pages/OrderPage.jsx'
+import {PayPalScriptProvider} from '@paypal/react-paypal-js'
 
 
 const router = createBrowserRouter([
@@ -67,6 +69,14 @@ const router = createBrowserRouter([
           </PrivateRoutes>
       },
 
+      {
+        path:'order/:id',
+        element:
+        <PrivateRoutes>
+          <OrderPage/>
+        </PrivateRoutes>
+      }
+
     ]
   },
 ])
@@ -76,7 +86,9 @@ function App() {
 
   return (
     <StoreProvider>
+      <PayPalScriptProvider deferLoading={true}>
       <RouterProvider router={router} />
+      </PayPalScriptProvider>
     </StoreProvider>
   )
 }

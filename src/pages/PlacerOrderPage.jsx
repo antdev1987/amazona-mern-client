@@ -1,6 +1,6 @@
 import React from 'react'
 import { useReducer } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import CheckOutSteps from '../component/CheckOutSteps'
 import useStore from '../context/StoreProvider'
 import { toast } from 'react-toastify'
@@ -30,6 +30,8 @@ const PlacerOrderPage = () => {
 
   //reducer local
   const [{loading}, dispatch] = useReducer(reducer,{loading:false})
+
+  const navigate = useNavigate()
 
 
   cart.itemsPrice = cart.cartItems.reduce((a, b) => {
@@ -62,9 +64,10 @@ const PlacerOrderPage = () => {
       dispatch({type:'success request'})
       localStorage.removeItem('cartItems');
       ctxDispatch({type:'cart clear'})
-      console.log(data)
-
       
+      // console.log(data)
+      navigate(`/order/${data.order._id}`)
+      toast.success(data.message)
     } catch (error) {
       dispatch({type:'fail request'})
       toast.error(getError(error))
