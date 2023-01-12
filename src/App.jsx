@@ -15,6 +15,7 @@ import PaymentMethodPage from './pages/PaymentMethodPage.jsx'
 import PlacerOrderPage from './pages/PlacerOrderPage.jsx'
 import OrderPage from './pages/OrderPage.jsx'
 import {PayPalScriptProvider} from '@paypal/react-paypal-js'
+import OrderHistoryPage from './pages/OrderHistoryPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -75,6 +76,11 @@ const router = createBrowserRouter([
         <PrivateRoutes>
           <OrderPage/>
         </PrivateRoutes>
+      },
+
+      {
+        path:'orderhistory',
+        element:<PrivateRoutes><OrderHistoryPage/></PrivateRoutes>
       }
 
     ]

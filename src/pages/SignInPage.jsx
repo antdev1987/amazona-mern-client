@@ -22,17 +22,6 @@ const SignInPage = () => {
 
   const redirect = redirectUrl ? redirectUrl : '/'
 
-  // console.log(redirect)
-
-  // useEffect(()=>{
-
-  //   console.log(userInfo)
-
-  //   if(userInfo?.token){
-  //     navigate(redirect)
-  //   }
-
-  // },[userInfo])
 
   const handleSubmit =async(e)=>{
     e.preventDefault()
@@ -41,7 +30,6 @@ const SignInPage = () => {
       const url = `${import.meta.env.VITE_API_BASE_URL}/user/signin`
       const {data} = await axios.post(url,{email,password})
       cxtDispatch({type:'user signin', payload:data})
-      console.log(redirect)
       // navigate(redirect)
     } catch (error) {
       toast.error(getError(error))

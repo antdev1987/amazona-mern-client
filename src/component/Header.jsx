@@ -22,6 +22,10 @@ const Header = () => {
     navigate('/signin')
   }
 
+  const handleOrderHistory=(e)=>{
+    navigate('/orderhistory')
+  }
+
   return (
     <div className='d-flex flex-column min-vh-100'>
         <ToastContainer />
@@ -66,8 +70,8 @@ const Header = () => {
                         {/* <Link to='/profile' className='text-secondary text-decoration-none'>User Profile</Link> */}
                         user Profile
                       </Dropdown.Item>
-                      <Dropdown.Item hre='/orderhistory' eventKey="2">
-                        Order History
+                      <Dropdown.Item onClick={handleOrderHistory}  eventKey="2">
+                        orderhistory
                         {/* <Link to='/orderhistory' className='text-secondary text-decoration-none'>Order History</Link> */}
                       </Dropdown.Item>
                       <Dropdown.Divider />
