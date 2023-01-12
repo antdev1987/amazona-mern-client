@@ -17,7 +17,7 @@ const Product = ({ product }) => {
     const existingItem = state.cart.cartItems.find((item) => item._id === product._id)
 
     const quantity = existingItem ? existingItem.quantity + 1 : 1
-    const url = `http://localhost:4000/api/products/${product._id}`
+    const url = `${import.meta.env.VITE_API_BASE_URL}/${product._id}`
 
     const { data } = await axios.get(url)
 
