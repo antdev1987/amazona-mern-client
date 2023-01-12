@@ -23,6 +23,7 @@ function reducer(state, action) {
 }
 
 console.log('primero')
+console.log('dos')
 console.log(import.meta.env.VITE_API_BASE_URL)
 
 
